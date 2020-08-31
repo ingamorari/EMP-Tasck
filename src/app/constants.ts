@@ -1,4 +1,5 @@
 export interface ITableData {
+  id: number;
   isActive: boolean;
   branch: {
     name: string;
@@ -16,6 +17,7 @@ export interface ITableData {
 
 export const TableData: ITableData[] = [
   {
+    id: 1,
     isActive: false,
     branch: {
       name: 'Electrabel',
@@ -31,6 +33,7 @@ export const TableData: ITableData[] = [
     crUnit: null,
   },
   {
+    id: 2,
     isActive: true,
     branch: {
       name: 'Electrabel',
@@ -46,6 +49,7 @@ export const TableData: ITableData[] = [
     crUnit: 20,
   },
   {
+    id: 3,
     isActive: false,
     branch: {
       name: 'GDF',
@@ -61,6 +65,7 @@ export const TableData: ITableData[] = [
     crUnit: null,
   },
   {
+    id: 4,
     isActive: true,
     branch: {
       name: 'GDF',
@@ -76,6 +81,7 @@ export const TableData: ITableData[] = [
     crUnit: 50,
   },
   {
+    id: 5,
     isActive: false,
     branch: {
       name: 'ENGIE',
@@ -91,6 +97,7 @@ export const TableData: ITableData[] = [
     crUnit: null,
   },
   {
+    id: 6,
     isActive: true,
     branch: {
       name: 'ENGIE',
@@ -106,6 +113,7 @@ export const TableData: ITableData[] = [
     crUnit: 30,
   },
   {
+    id: 7,
     isActive: false,
     branch: {
       name: 'EDF',

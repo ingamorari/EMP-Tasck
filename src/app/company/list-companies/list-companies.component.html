@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="d-flex">
+        <h3>Campaigns</h3>
+        <div class="date-block ml-auto">
+            <div class="style-date d-flex">Last 30 day: 8 Jul 2019 - 6Aug 2019
+                <div><img src="../assets/icons/arrow.svg" width="16px" class="date-block-icon"></div>
+            </div>
+            <div class="style-note">Note: Does not include today's data</div>
+        </div>
+        <div class="style-date d-flex ml-3">Update 5 min ago
+            <div><img src="../assets/icons/refresh.svg" width="16px" class="date-block-icon"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <input
+                        type="text"
+                        placeholder="Search for a campaign"
+                        class="form-control"
+                        (onDebounce)="onSearch()"
+                        [(ngModel)]="searchValue"
+                        [debounce]="300"
+                />
+            </div>
+        </div>
+    </div>
+    <div class="table-block">
+        <div class="d-flex pt-2 pb-2">
+            <button class="filter-button">
+                <div class="d-flex">
+                    <div><img src="../assets/icons/filter.svg" width="20px"></div>
+                    <div class="mr-2 ml-2">Filter</div>
+                    <div><img src="../assets/icons/arrow.svg" width="16px" class="style-icon"></div>
+                </div></button>
+            <button class="create-button">
+                <div class="d-flex">
+                    <div class="mr-2 mt-auto mb-auto"><img src="../assets/icons/plus.svg" width="17px"></div>
+                    <div>Create campaign</div>
+                </div>
+            </button>
+        </div>
+        <table class="w-100">
+            <thead>
+            <tr>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input style-check" type="checkbox" />
+                    </div>
+                </td>
+                <td></td>
+                <td>
+                    <div (click)="sortData('branch.name')" class="sortable">Branch &#8645;</div>
+                </td>
+                <td>
+                    <div (click)="sortData('name')" class="sortable">Campaign Name &#8645;</div>
+                </td>
+                <td>Status</td>
+                <td>Start</td>
+                <td>End</td>
+                <td>Target</td>
+                <td class="text-center">Result</td>
+                <td>Budget</td>
+                <td class="text-center">Spent</td>
+                <td>CR/Unit</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let element of data; let i = index">
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input style-check" type="checkbox" />
+                    </div>
+                </td>
+                <td>
+                    <toggle-button (changed)="element.isActive = $event" [index]="i" [value]="element.isActive"></toggle-button>
+                </td>
+                <td>
+                    <div>{{ element.branch.name }}</div>
+                    <div class="category">{{ element.branch.category }}</div>
+                </td>
+                <td>
+                    <a [routerLink]="['/companies/', element.id]">{{ element.name }}</a>
+                </td>
+                <td [style.color]="element.isActive ? '#43A047' : '#7F7F7F'" class="is-active-cell">
+                    <div class="d-flex">
+                        <div [style.background-color]="element.isActive ? '#43A047' : '#7F7F7F'" class="point"></div>
+                        <div class="text">{{ element.isActive ? 'Active' : 'Inactive' }}</div>
+                    </div>
+                </td>
+                <td>{{ element.startDate === 'Ongoing' ? element.startDate : (element.startDate | date: 'dd/MM/yyyy HH:mm') }}</td>
+                <td>{{ element.endDate === 'Ongoing' ? element.endDate : (element.endDate | date: 'dd/MM/yyyy HH:mm') }}</td>
+                <td class="text-center">{{ element.target }}</td>
+                <td class="progress-cell">
+                    <app-progress [baseValue]="element.result" [targetValue]="element.target"></app-progress>
+                </td>
+                <td class="text-center">{{ element.budget }}</td>
+                <td class="progress-cell">
+                    <app-progress [baseValue]="element.spent" [targetValue]="element.budget"></app-progress>
+                </td>
+                <td class="text-center">{{ element.crUnit || '-' }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
